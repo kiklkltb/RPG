@@ -533,3 +533,11 @@ function changeName() {
         alert("Имя должно быть от 3 до 20 символов.");
     }
 }
+taskListEl.addEventListener('click', function (e) {
+    if (e.target.classList.contains('complete-task-btn')) {
+        const index = parseInt(e.target.dataset.index);
+        if (!isNaN(index)) {
+            completeTask(index);
+        }
+    }
+});
