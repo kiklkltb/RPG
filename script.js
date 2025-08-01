@@ -209,6 +209,7 @@ function showNotification(message, type = 'info') {
 }
 // --- 5. Функция для получения опыта и проверки уровня ---
 function gainExp(amount) {
+    const oldLevel = character.level; // <-- Эта строка отсутствовала
     character.exp += amount;
 
     while (character.exp >= character.expNeeded) {
@@ -380,21 +381,24 @@ function randomAbilityEvent() {
     const chance = Math.random();
     if (chance <= 0.6) {
         const newAbility = abilitiesList[Math.floor(Math.random() * abilitiesList.length)];
-        if (!character.abilities.includes(newAbility)) {
-            character.abilities.push(newAbility);
-            showNotification(`Вам повезло! Вы получили новую способность: "${newAbility}"!"`);
+        // Здесь мы проверяем, есть ли уже такая способность по имени
+        if (!character.abilities.includes(newAbility.name)) {
+            character.abilities.push(newAbility.name);
+            // Исправлено: используем newAbility.name
+            showNotification(`Вам повезло! Вы получили новую способность: "${newAbility.name}" [${newAbility.rarity}]!`, 'success');
         } else {
-            showNotification("Вы получили уже имеющуюся способность. Ничего не произошло.");
+            showNotification("Вы получили уже имеющуюся способность. Ничего не произошло.", 'info');
         }
     } else if (chance > 0.6 && chance <= 0.7) {
         if (character.abilities.length > 0) {
             const lostAbility = character.abilities.splice(Math.floor(Math.random() * character.abilities.length), 1)[0];
-            showNotification(`Внимание! Вы потеряли способность: "${lostAbility}".`);
+            // Исправлено: используем lostAbility.name
+            showNotification(`Внимание! Вы потеряли способность: "${lostAbility.name}".`, 'warning');
         } else {
-            showNotification("Вам повезло! У вас не было способностей, чтобы их отнять.");
+            showNotification("Вам повезло! У вас не было способностей, чтобы их отнять.", 'info');
         }
     } else {
-        showNotification("Сегодня ничего особенного не произошло.");
+        showNotification("Сегодня ничего особенного не произошло.", 'info');
     }
     saveProgress();
 }
