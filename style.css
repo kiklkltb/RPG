@@ -1,0 +1,615 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('background.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #111;
+    color: #ffd700;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 0 20px #000;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.character-card, .tasks-container {
+    background: rgba(30, 30, 40, 0.9);
+    backdrop-filter: blur(5px);
+    border: 1px solid #444;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    padding: 2rem;
+    width: 45%;
+    min-width: 300px;
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 1s ease-out;
+}
+
+    .character-card:hover, .tasks-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+h1, h2, h3 {
+    font-family: 'Uncial Antiqua', cursive;
+    color: #ffde59;
+    border-bottom: 2px solid #ffde5920;
+    padding-bottom: 0.5rem;
+}
+
+#character-info p {
+    margin: 0.5rem 0;
+}
+
+#character-info span {
+    font-weight: bold;
+    color: #ffde59;
+}
+
+.stats-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+    .stats-list ul li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #444;
+    }
+
+        .stats-list ul li:last-child {
+            border-bottom: none;
+        }
+
+.progress-bar-container {
+    background-color: #444;
+    border-radius: 5px;
+    height: 15px;
+    margin: 0.5rem 0;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+    box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+}
+
+.add-stat-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .add-stat-btn:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+    }
+
+#reset-stats-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+    #reset-stats-btn:hover {
+        background-color: #c82333;
+    }
+
+/* Стили для ежедневных заданий */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #444;
+    transition: all 0.3s ease-in-out;
+}
+
+    .task-item:hover {
+        transform: scale(1.01);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .task-item:last-child {
+        border-bottom: none;
+    }
+
+.complete-task-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .complete-task-btn:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+    }
+
+.task-item.completed {
+    background-color: #e9ecef1a;
+    opacity: 0.6;
+}
+
+/* Стили для разных уровней заданий */
+.task-level-easy {
+    color: #f0fdf2;
+    background-color: #1e4529;
+    border-color: #c3e6cb;
+    animation: gentlePulse 2s infinite ease-in-out;
+}
+
+.task-level-medium {
+    color: #cce5ff;
+    background-color: #173659;
+    border-color: #b8daff;
+    animation: subtleGlow 2.5s infinite ease-in-out;
+}
+
+.task-level-hard {
+    color: #f8d7da;
+    background-color: #5d141e;
+    border-color: #f5c6cb;
+    animation: hardFlicker 1.5s infinite alternate;
+}
+
+.task-level-divine {
+    color: #ffeb3b;
+    background-color: #5c4300;
+    border-color: #ffe680;
+    animation: divineGlow 3s infinite ease-in-out;
+}
+
+.task-level-yellow-mandatory {
+    color: #fff3cd;
+    background-color: #856404;
+    border-color: #ffeeba;
+    animation: mandatoryPulse 1s infinite alternate;
+}
+
+.task-level-red-mandatory {
+    color: #f8d7da;
+    background-color: #721c24;
+    border-color: #f5c6cb;
+    animation: dangerShake 0.5s infinite alternate;
+}
+/* Анимация для скрытых способностей */
+@keyframes flicker {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#character-abilities span {
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 2px;
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e2f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+/* Анимация плавного появления блоков */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.name-change-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#new-name-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 8px;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    flex-grow: 1;
+}
+
+    #new-name-input::placeholder {
+        color: #999;
+    }
+
+.name-change-container button {
+    background-color: #673ab7;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+    .name-change-container button:hover {
+        background-color: #512da8;
+    }
+
+/* НОВЫЕ КЛЮЧЕВЫЕ КАДРЫ АНИМАЦИИ ДЛЯ ЗАДАНИЙ */
+@keyframes gentlePulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        transform: scale(1.005);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+}
+
+@keyframes subtleGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    }
+}
+
+@keyframes hardFlicker {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px #c0392b;
+    }
+
+    50% {
+        transform: scale(1.005);
+        box-shadow: 0 0 15px #e74c3c;
+    }
+}
+
+@keyframes divineGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px #ffde59;
+    }
+
+    50% {
+        box-shadow: 0 0 25px #ffd700, 0 0 35px #ffeb3b;
+    }
+}
+
+@keyframes mandatoryPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #f1c40f;
+    }
+
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 0 20px #f39c12;
+    }
+}
+
+@keyframes dangerShake {
+    0%, 100% {
+        transform: translateX(0);
+        box-shadow: 0 0 10px #e74c3c;
+    }
+
+    25% {
+        transform: translateX(-2px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(2px);
+    }
+}
+/* ...Весь остальной CSS код... */
+
+/* НОВЫЕ СТИЛИ: Анимированное сообщение о повышении уровня */
+#level-up-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 4rem;
+    color: #ffde59;
+    text-shadow: 0 0 20px #ffd700, 0 0 30px #ffeb3b;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+    #level-up-message.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+        animation: levelUpFlicker 1.5s ease-in-out forwards;
+    }
+
+@keyframes levelUpFlicker {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* НОВЫЕ СТИЛИ: Визуализация рангов */
+#char-rank {
+    font-weight: normal;
+}
+
+    #char-rank::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-right: 8px;
+    }
+
+.rank-novice::before {
+    content: "\f2b5"; /* Иконка меча */
+    color: #a0a0a0;
+}
+
+.rank-novice-hunter::before {
+    content: "\f51a"; /* Иконка лука */
+    color: #4caf50;
+}
+
+.rank-e-rank::before {
+    content: "\f02d"; /* Иконка свитка */
+    color: #ffeb3b;
+}
+
+.rank-d-rank::before {
+    content: "\f002"; /* Иконка глаза */
+    color: #e91e63;
+}
+
+.rank-c-rank::before {
+    content: "\f06d"; /* Иконка огня */
+    color: #e67e22;
+}
+
+.rank-b-rank::before {
+    content: "\f0d0"; /* Иконка молнии */
+    color: #3498db;
+}
+
+.rank-a-rank::before {
+    content: "\f5e1"; /* Иконка крыльев */
+    color: #9b59b6;
+}
+
+.rank-s-rank::before {
+    content: "\f06a"; /* Иконка звезды */
+    color: #f1c40f;
+}
+
+.rank-ss-rank::before {
+    content: "\f0c0"; /* Иконка короны */
+    color: #ffde59;
+}
+
+.rank-sss-rank::before {
+    content: "\f05a"; /* Иконка щита */
+    color: #ff6347;
+}
+
+.rank-awakened::before {
+    content: "\f2db"; /* Иконка дракона */
+    color: #c0392b;
+}
+
+.rank-transcendent::before {
+    content: "\f544"; /* Иконка кольца */
+    color: #7f8c8d;
+}
+
+/* ...Весь остальной CSS код... */
+/* ... весь ваш существующий CSS ... */
+
+/* Стили для улучшенных уведомлений */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    min-width: 250px;
+}
+
+    .notification.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .notification.success {
+        background-color: #28a745;
+    }
+
+    .notification.error {
+        background-color: #dc3545;
+    }
+
+    .notification.warning {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+/* Стили для раздела "Сражение" */
+.battle-section {
+    width: 92%; /* Чтобы занимал всю ширину, как и другие блоки */
+}
+
+#battle-log {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+    min-height: 50px;
+}
+
+    #battle-log p {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+/* Обновленный CSS для рангов */
+/* ... ваш существующий CSS для рангов ... */
+
+.rank-novice::before {
+    content: "\f2b5"; /* Иконка меча */
+    color: #a0a0a0;
+}
+
+.rank-novice-hunter::before {
+    content: "\f51a"; /* Иконка лука */
+    color: #4caf50;
+}
+
+.rank-e-rank::before {
+    content: "\f02d"; /* Иконка свитка */
+    color: #ffeb3b;
+}
+
+.rank-veteran::before {
+    content: "\f0a3"; /* Иконка щита */
+    color: #9b59b6;
+}
+
+/* ... остальные ранги ... */
+
+/* Дополнительные стили для анимации скрытой способности */
+@keyframes flicker {
+    0%, 100% {
+        color: #000;
+        text-shadow: none;
+    }
+
+    50% {
+        color: #fff;
+        text-shadow: 0 0 5px #fff;
+    }
+}
+
+/* Новый стиль для изменения имени */
+.name-change-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+    .name-change-container input {
+        border: 1px solid #ccc;
+        padding: 0.3rem;
+        border-radius: 5px;
+    }
+
+    .name-change-container button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.3rem 0.5rem;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .name-change-container button:hover {
+            background-color: #0056b3;
+        }

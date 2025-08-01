@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моё RPG-приключение</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>Моё RPG-приключение</h1>
+    </header>
+
+    <main>
+        <div class="character-card">
+            <h2>Персонаж</h2>
+            <div id="character-info">
+                <p>Имя: <span id="char-name">Герой</span></p>
+                <div class="name-change-container">
+                    <input type="text" id="new-name-input" placeholder="Новое имя">
+                    <button onclick="changeName()">Сменить имя</button>
+                </div>
+                <p>Уровень: <span id="char-level">1</span></p>
+                <p>Ранг: <span id="char-rank" class="rank-novice">Новичок</span></p>  
+                <p>Опыт: <span id="char-exp">0</span> / <span id="exp-needed">100</span></p>
+                <div class="progress-bar-container">
+                    <div id="exp-bar" class="progress-bar"></div>
+                </div>
+                <p>Очки характеристик: <span id="stat-points">0</span></p>
+                <p id="character-abilities" style="color: #007bff;"></p>
+                <button id="reset-stats-btn" style="display: none;">Сбросить очки</button>
+            </div>
+
+            <div class="stats-list">
+                <h3>Характеристики</h3>
+                <ul>
+                    <li><i class="fas fa-fist-raised" style="color: #e74c3c;"></i> Сила (STR): <span id="stat-str">1</span> <button class="add-stat-btn" data-stat="str" aria-label="Увеличить Силу">+</button></li>
+                    <li><i class="fas fa-running" style="color: #2ecc71;"></i> Ловкость (AGI): <span id="stat-agi">1</span> <button class="add-stat-btn" data-stat="agi" aria-label="Увеличить Ловкость">+</button></li>
+                    <li><i class="fas fa-brain" style="color: #3498db;"></i> Интеллект (INT): <span id="stat-int">1</span> <button class="add-stat-btn" data-stat="int" aria-label="Увеличить Интеллект">+</button></li>
+                    <li><i class="fas fa-heartbeat" style="color: #9b59b6;"></i> Выносливость (VIT): <span id="stat-vit">1</span> <button class="add-stat-btn" data-stat="vit" aria-label="Увеличить Выносливость">+</button></li>
+                    <li><i class="fas fa-dice" style="color: #f1c40f;"></i> Удача (LUK): <span id="stat-luk">1</span> <button class="add-stat-btn" data-stat="luk" aria-label="Увеличить Удачу">+</button></li>
+                    <li><i class="fas fa-hands-helping" style="color: #e67e22;"></i> Харизма (CHA): <span id="stat-cha">1</span> <button class="add-stat-btn" data-stat="cha" aria-label="Увеличить Харизму">+</button></li>
+                    <li><i class="fas fa-crosshairs" style="color: #1abc9c;"></i> Меткость (ACC): <span id="stat-acc">1</span> <button class="add-stat-btn" data-stat="acc" aria-label="Увеличить Меткость">+</button></li>
+                    <li><i class="fas fa-magic" style="color: #c0392b;"></i> Мудрость (WIS): <span id="stat-wis">1</span> <button class="add-stat-btn" data-stat="wis" aria-label="Увеличить Мудрость">+</button></li>
+                </ul>
+                <button onclick="claimDailyAbility()">Получить способность дня</button>
+            </div>
+        </div>
+
+        <div class="tasks-container">
+            <h2>Ежедневные задания</h2>
+            <p>До полуночи: <span id="timer">--</span></p>
+            <div id="task-list"></div>
+        </div>
+        
+        <div class="tasks-container battle-section">
+            <h2><i class="fas fa-fist-raised"></i> Сражение</h2>
+            <p>Сразитесь со случайным монстром, чтобы получить много опыта!</p>
+            <button id="battle-btn" class="complete-task-btn">Найти врага</button>
+            <div id="battle-log"></div>
+        </div>
+    </main>
+    
+    <div id="level-up-message" class="hidden">УРОВЕНЬ ПОВЫШЕН!</div>
+    <div id="notification-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
